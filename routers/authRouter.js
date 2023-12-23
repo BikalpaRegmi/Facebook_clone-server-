@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const User = require('../models/userModel')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 //for registeration
 router.route('/register').post(async(req,res)=>{
@@ -31,12 +32,15 @@ router.route('/signin').post(async(req,res)=>{
            const isPassMatched = await bcrypt.compare(user.password , userExists.password);
            if(!isPassMatched) res.json({error:'Password didnt matched'})
            else{
-            return res.json('signIn sucessfull')
+        const token = jwt.sign({_id:userExists._id} , process.env.jwtKey)
+         res.json(token)   ;          
         }
         }
     } catch (error) {
         res.json(error);
     }
 })
+
+
 
 module.exports = router
