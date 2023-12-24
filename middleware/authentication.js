@@ -21,6 +21,7 @@ module.exports = async (req, res, next) => {
             const userData = await User.findById(_id);
 
             req.user = userData
+            
             next();
         } catch (err) {
             console.error(err);

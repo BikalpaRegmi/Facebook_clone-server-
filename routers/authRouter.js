@@ -33,7 +33,8 @@ router.route('/signin').post(async(req,res)=>{
            if(!isPassMatched) res.json({error:'Password didnt matched'})
            else{
         const token = jwt.sign({_id:userExists._id} , process.env.jwtKey)
-         res.json(token)   ;          
+         res.json({token , userExists})  ;          
+         console.log({token , userExists})  ;          
         }
         }
     } catch (error) {
