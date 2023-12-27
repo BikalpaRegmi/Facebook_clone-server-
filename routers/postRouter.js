@@ -79,5 +79,15 @@ router.route('/comment').patch(authentication , async(req,res)=>{
    }
 })
 
+//for deleting post
+router.route('/deletePost/:id').delete(async(req,res)=>{
+try {
+   const {id} = req.params ;
+   const deletePost = await Post.findByIdAndDelete({_id:id}) ;
+   res.json(deletePost) ;
+} catch (error) {
+   res.send(error)
+}}
+)
 
 module.exports = router
