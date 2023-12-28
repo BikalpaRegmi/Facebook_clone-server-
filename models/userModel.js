@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator') 
 const bcrypt = require('bcryptjs')
+const {ObjectId} = mongoose.Schema.Types
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -31,10 +32,18 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:false,
     },
-    friends:{
-        type:Array,
-        default:[],
-    }
+    followers:[{
+        type:ObjectId,
+        ref: 'USERS',
+    }],
+    followings:[{
+      type:ObjectId,
+      ref: 'USERS',
+    }],
+    photo:{
+   type:String,
+   default:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png',
+    }, 
 },{timestamps:true , versionKey:false});
 
 userSchema.pre('save' , async function(next){
