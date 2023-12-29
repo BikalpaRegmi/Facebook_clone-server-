@@ -78,4 +78,13 @@ router.route('/uploadPP').patch( authentication , async(req,res)=>{
     res.send(error)
    }
 })
+//get all users
+router.route('/getallpeople').get(async(req,res)=>{
+    try {
+        const result = await User.find() ;
+        res.json(result)
+    } catch (error) {
+        res.send(error)
+    }
+})
 module.exports = router
