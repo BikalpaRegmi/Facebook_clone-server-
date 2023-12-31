@@ -87,4 +87,14 @@ router.route('/getallpeople').get(async(req,res)=>{
         res.send(error)
     }
 })
+
+//Update own profile
+router.route('/updateMe').patch(authentication , async(req,res)=>{
+    try {
+        const result = await User.findByIdAndUpdate({_id:req.user._id} , req.body , {new:true}) ;
+        res.json(result) ;
+    } catch (error) {
+        res.send(error)
+    }
+}) ;
 module.exports = router
