@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const mongoose = require('mongoose')
 const User = require('../models/userModel')
-const Post = require('../models/postSchema')
 const authentication = require('../middleware/authentication')
+
 //to get details about user
 router.get('/user/:id' , async(req,res)=>{
     try {

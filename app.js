@@ -3,12 +3,12 @@ const app = express();
 require('dotenv').config()
 const Port = process.env.PORT || 3003 ;
 require('./dbs/connection')
-require('./models/userModel');
 const cors = require('cors')
 app.use(express.json());
 const authRoutes = require('./routers/authRouter')
 const postRoutes = require('./routers/postRouter')
 const profileRouter = require('./routers/profileRouter')
+const chatRouter = require('./routers/chatRouter')
 
 app.use(cors({
     origin:['http://localhost:5173'],
@@ -18,6 +18,7 @@ app.use(cors({
 app.use('/api/users' , authRoutes)
 app.use('/api/post' , postRoutes)
 app.use('/api/profile' , profileRouter)
+app.use('/api/chat' , chatRouter)
 
 app.get('/' , (req,res)=>res.send('Server Is LIVE'));
 
